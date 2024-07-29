@@ -19,12 +19,12 @@ const style = {
   p: 4,
 };
 
-interface SigInProps{
-  open:boolean,
-  setOpen:(open:boolean)=>void
+interface SignInProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
 }
 
-export default function Index({open, setOpen}:SigInProps) {
+const SignInModal: React.FC<SignInProps>=({open, setOpen}) =>{
 
 
 
@@ -86,3 +86,6 @@ export default function Index({open, setOpen}:SigInProps) {
     </div>
   );
 }
+
+
+export default SignInModal;
