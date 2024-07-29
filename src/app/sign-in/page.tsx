@@ -8,22 +8,25 @@ import { useState } from 'react';
 import { TextField } from '@mui/material';
 const style = {
   position: 'absolute' as 'absolute',
-  top: '50%',
+  top: '45%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '0px solid #000',
   boxShadow: 24,
+  borderRadius:4,
   p: 4,
 };
 
+interface SigInProps{
+  open:boolean,
+  setOpen:(open:boolean)=>void
+}
+
+export default function Index({open, setOpen}:SigInProps) {
 
 
-export default function Index() {
-
-  const [open, setOpen] =useState(false);
-  const handleOpen = () => setOpen(true);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,7 +38,6 @@ export default function Index() {
   };
   return (
     <div>
-      <button onClick={handleOpen}>Button</button>
       <Modal
         open={open}
         onClose={ () => setOpen(false)}
@@ -49,6 +51,7 @@ export default function Index() {
               noValidate
               sx={{ mt: 1 }}
             >
+              <h3 className='text-center text-[24px] mb-4'>Login orqali kirish</h3>
               <TextField
                 margin="normal"
                 required
@@ -73,9 +76,9 @@ export default function Index() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, paddingY:"12px" }}
               >
-                Sign In
+                Login
               </Button>
             </Box>
         </Box>

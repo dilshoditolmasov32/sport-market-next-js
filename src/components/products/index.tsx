@@ -45,7 +45,7 @@ const Index = () => {
               >
                 <div className="absolute top-[10px] right-[14px]">
                   <button>
-                    <Image src={like} alt="like" className="max-xs:w-[40px]" />
+                    <Image src={like} alt="like" className="max-xs:w-[24px]" />
                   </button>
                 </div>
               <div className="max-sm:flex max-sm:justify-center">

@@ -70,7 +70,7 @@ const Index = () => {
                   type="email"
                   required
                   placeholder="support@figma.com"
-                  className="py-[10px] px-4 font-Fira Sans text-[12px] text-[#9A9EA5] leading-3 rounded-[5px] border-[1px] border-[#9A9EA5] outline-none max-xs:w-full "
+                  className="py-[15px] px-4 font-Fira Sans text-[12px] text-[#9A9EA5] leading-3 rounded-[5px] border-[1px] border-[#9A9EA5] outline-none max-xs:w-full "
                 />
                 <button
                   type="submit"

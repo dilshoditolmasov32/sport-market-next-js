@@ -4,7 +4,7 @@ const Index = () => {
   return (
     <div className="">
       <div className="container">
-        <div className="max-w-[504px] w-full rounded-[8px] bg-white pl-10 pt-[45px] pr-[50px] pb-4  ">
+        <div className="max-w-[504px] w-full rounded-[8px] bg-white px-8 pt-[45px]  pb-4  ">
           <h3 className="text-[20px] text-center ">
             Введите код отправленный на <br /> номер
             <span className="font-bold"> +998 99 9** **56</span>
@@ -41,7 +41,7 @@ const Index = () => {
           </div>
           <p className="text-[#FBD029] text-center my-2">Не полусили код ?</p>
 
-          <button className="py-[20px] px-[162.5px] my-[60px] bg-[#FBD029] rounded-[5px] text-[20px] ">
+          <button className="py-[20px] w-full my-[60px] bg-[#FBD029] rounded-[5px] text-[20px] ">
             Подвердить
           </button>
         </div>

@@ -31,7 +31,7 @@ const Index = () => {
             <div className="flex gap-6 max-xs:grid max-xs:grid-cols-1 xs:grid xs:grid-cols-2 xs:justify-items-center md:grid md:grid-cols-3 lg:grid lg:grid-cols-4">
                 {
                     boxs?.map((item)=>(
-                        <div key={item.id} className="bg-white rounded-[8px] w-[292px] pl-10 pt-16 pr-[70px] max-xs:w-full max-xs:flex max-xs:gap-5 max-xs:items-center max-xs:p-8 xs:p-5 xs:max-w-[290px] xs:w-full lg:py-16 lg:px-10">
+                        <div key={item.id} className="bg-white rounded-[8px] w-[292px] pl-10 pt-16 pr-[70px] max-xs:w-full max-xs:flex max-xs:gap-5 max-xs:items-center max-xs:p-8 xs:p-5 xs:max-w-[290px] xs:w-full lg:py-16 lg:px-10 transform transition-transform duration-300 ease-in-out hover:scale-105">
                       <div className="xs:flex xs:justify-center lg:flex lg:justify-start">
                       <Image src={item.image} alt="icon" />
                       </div>

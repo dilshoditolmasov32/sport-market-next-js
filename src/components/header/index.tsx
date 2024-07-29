@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import "./index.css";
+import Login from '../../app/sign-in/page'
 import {
   logo,
   phone_icon,
@@ -18,7 +19,9 @@ import Image from "next/image";
 import { Button } from "@mui/material";
 
 const Index = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] =useState(false);
+  const [isOpen, setIsOpen] =useState(false);
+  
 
   const links = [
     {
@@ -43,8 +46,13 @@ const Index = () => {
     },
   ];
 
+  const handleOpen=()=>{
+    setOpen(true)
+  }
+
   return (
     <>
+    <Login open={open} setOpen={setOpen} />
       <div className="bg-[#1F1D14]">
         <div className="container mx-auto px-4">
           <nav className="flex justify-between items-center py-[10px]">
@@ -184,7 +192,7 @@ const Index = () => {
             </div>
             <div className="flex items-center gap-[10px] max-md:w-full max-md:flex max-md:gap-5 max-xs:flex max-xs:justify-between ">
               <Link href={"sign-in"}>
-                <button className="flex items-center py-[13px] px-[13px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px]">
+                <button onClick={handleOpen} className="flex items-center py-[13px] px-[13px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px]">
                   <Image src={user} alt="user" />
                 </button>
               </Link>

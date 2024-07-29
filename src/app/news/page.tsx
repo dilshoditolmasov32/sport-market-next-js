@@ -72,7 +72,7 @@ const Index = () => {
           ))}
         </div>
         <button
-          className="px-8 border-[2px] hover:border-[red] hover:scale-110 hover:bg-blue-950 hover:text-white transition-all duration-300 border-[#FBD029] rounded-[5px] py-[15px] max-sm:w-[99%] max-xs:mx-5 max-xs:w-[90%]
+          className="px-8 border-[2px] hover:bg-[#fbd029] transform transition-transform duration-500 ease-in-out border-[#FBD029] rounded-[5px] py-[15px] max-sm:w-[99%] max-xs:mx-5 max-xs:w-[90%]
             "
         >
           Показать ещё
