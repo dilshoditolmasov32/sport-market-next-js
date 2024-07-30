@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import "./index.css";
-import Login from "../sign-in/page";
+import Login from "../sign-in";
 import {
   logo,
   phone_icon,

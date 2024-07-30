@@ -13,7 +13,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '0px solid #000',
+  border: '0px solid #F8B400',
   boxShadow: 24,
   borderRadius:4,
   p: 4,
@@ -31,18 +31,14 @@ const SignInModal: React.FC<SignInProps>=({open, setOpen}) =>{
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    console.log(data)
   };
   return (
     <div>
       <Modal
         open={open}
         onClose={ () => setOpen(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        
       >
         <Box sx={style}>
         <Box
@@ -51,7 +47,7 @@ const SignInModal: React.FC<SignInProps>=({open, setOpen}) =>{
               noValidate
               sx={{ mt: 1 }}
             >
-              <h3 className='text-center text-[24px] mb-4'>Login orqali kirish</h3>
+              <h3 className='text-center text-[24px] mb-4 font-bold font-Fira Sans'>Login orqali kirish</h3>
               <TextField
                 margin="normal"
                 required
@@ -61,6 +57,7 @@ const SignInModal: React.FC<SignInProps>=({open, setOpen}) =>{
                 name="email"
                 autoComplete="email"
                 autoFocus
+                sx={{borderColor:"#F8B400"}}
               />
               <TextField
                 margin="normal"
@@ -76,7 +73,12 @@ const SignInModal: React.FC<SignInProps>=({open, setOpen}) =>{
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, paddingY:"12px" }}
+                sx={{ mt: 3, mb: 2, paddingY:"10px", bgcolor:"#FBD029", '&:hover': {
+                  bgcolor: "#F8B400", 
+                }, 
+                fontSize:"20px",
+                textTransform:"capitalize"
+              }}
               >
                 Login
               </Button>
