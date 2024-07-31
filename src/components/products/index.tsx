@@ -40,7 +40,7 @@ const Index = () => {
           <div className="flex gap-6 max-lg:grid max-lg:grid-cols-3 max-md:grid max-md:grid-cols-2 max-md:justify-items-center   max-xs:grid  max-xs:grid-cols-1 max-xs:justify-items-center">
             {products?.map((item, index) => (
               <div
-                className="pt-[25px] rounded-[5px] bg-white w-[292px] relative max-lg:max-w-[290px] max-lg:w-full max-xs:max-w-[420px] max-xs:w-full "
+                className="pt-[25px] rounded-[5px] bg-white w-[292px] relative max-lg:max-w-[290px] max-lg:w-full max-xs:max-w-[420px] max-xs:w-full group"
                 key={index}
               >
                 <div className="absolute top-[10px] right-[14px]">
@@ -48,11 +48,11 @@ const Index = () => {
                     <Image src={like} alt="like" className="max-xs:w-[24px]" />
                   </button>
                 </div>
-              <div className="max-sm:flex max-sm:justify-center">
+              <div className="max-sm:flex max-sm:justify-center overflow-hidden">
               <Image
                   src={item.image}
                   alt="product_image"
-                  className="pl-[30px] pr-5 max-xs:w-[220px]"
+                  className="pl-[30px] pr-5 max-xs:w-[220px] transform transition-transform duration-300 ease-in-out group-hover:scale-110"
                 />
               </div>
                 <p className="pl-[30px] pr-5 mb-6 mt-5 text-[20px] max-sm:p-4 max-sm:mb-4">
@@ -61,7 +61,7 @@ const Index = () => {
                 <div className="pl-[30px] pr-5 mb-[25px] text-[20px] font-semibold max-sm:mb-4">
                   {item.price}
                 </div>
-                <button className="bg-[#FBD029] w-full flex items-center justify-center gap-[6px] py-[15px] font-Fira Sans text-[20px] text-[#1F1D14] rounded-br-[5px] rounded-bl-[5px]">
+                <button className="bg-[#FBD029] w-full flex items-center justify-center gap-[6px] py-[15px] font-Fira Sans text-[20px] text-[#1F1D14] rounded-br-[5px] rounded-bl-[5px] hover:bg-[#f8b600e0] hover:text-[#1F1D14] transition-all duration-500 ease-linear">
                   <Image src={cart} alt="korzinka_icon" />
                   Корзина
                 </button>

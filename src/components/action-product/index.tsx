@@ -38,7 +38,7 @@ const Index = () => {
           <div className="flex gap-6 max-lg:grid max-lg:grid-cols-3  max-md:grid max-md:grid-cols-2 max-md:justify-items-center max-xs:grid max-xs:grid-cols-1">
             {products?.map((item, index) => (
               <div
-                className="pt-[25px] rounded-[5px] bg-white w-[292px] relative max-lg:max-w-[280px] max-lg:w-full max-md:max-w-[290px]  max-xs:max-w-[440px] max-xs:w-full "
+                className="pt-[25px] rounded-[5px] bg-white w-[292px] relative max-lg:max-w-[280px] max-lg:w-full max-md:max-w-[290px]  max-xs:max-w-[440px] max-xs:w-full group"
                 key={index}
               >
                   
@@ -50,18 +50,20 @@ const Index = () => {
                 <div className="absolute top-[0] left-[0px]">
                 <Image src={action} alt="action" />
                 </div>
-                <Image
+             <div className="overflow-hidden m-3">
+             <Image
                   src={item.image}
                   alt="product_image"
-                  className="pl-[30px] pr-5"
+                  className="pl-[30px] pr-5 transform transition-transform duration-300 ease-in-out group-hover:scale-105"
                 />
+             </div>
                 <p className="pl-[30px] pr-5 mb-6 mt-5 text-[20px]">
                   {item.name}
                 </p>
                 <div className="pl-[30px] pr-5 mb-[25px] text-[20px] font-semibold">
                   {item.price}
                 </div>
-                <button className="bg-[#FBD029] w-full flex items-center justify-center gap-[6px] py-[15px] font-Fira Sans text-[20px] text-[#1F1D14] rounded-br-[5px] rounded-bl-[5px]">
+                <button className="bg-[#FBD029] w-full hover:bg-[#f8b600e0] hover:text-[#1F1D14] transition-all duration-500 ease-linear  flex items-center justify-center gap-[6px] py-[15px] font-Fira Sans text-[20px] text-[#1F1D14] rounded-br-[5px] rounded-bl-[5px]">
                   <Image src={cart} alt="korzinka_icon" />
                   Корзина
                 </button>

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Footer, Header } from "@/components";
 
-
 export const metadata: Metadata = {
   title: "next js",
   description: "Final Exam",
@@ -23,7 +22,6 @@ export default function RootLayout({
         <main>{children}</main>
 
         <footer>
-
           <Footer />
         </footer>
       </body>

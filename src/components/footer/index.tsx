@@ -55,7 +55,7 @@ const Index = () => {
                 <Link
                   href="https://maps.app.goo.gl/3xpddUHJGCxbQGy27"
                   target="_blank"
-                  className="font-Fira Sans text-white  text-[16px]"
+                  className="font-Fira Sans text-white  text-[16px] max-w-[235px]"
                 >
                   Tashkent Sh. Chilonzor 9 kvartal 12 uy
                 </Link>

@@ -11,6 +11,7 @@ import KartaModal from "./modal/karta"
 import MessageModal from "./modal/message"
 import SuccessModal from "./modal/success"
 import MapModal from "./modal/map"
+import Skeleton from "./skeleton"
 
 
-export {Header, Footer, Katalog, Products, BoxCard,Box, ActionProduct, RangeSlider, SingleSwipper, KartaModal,MessageModal, SuccessModal,MapModal }
+export {Header, Footer, Katalog, Products, BoxCard,Box, ActionProduct, RangeSlider, SingleSwipper, KartaModal,MessageModal, SuccessModal,MapModal, Skeleton }

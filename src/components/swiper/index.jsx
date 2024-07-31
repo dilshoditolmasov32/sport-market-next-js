@@ -42,7 +42,7 @@ export default function Swipper() {
             <Image
               src={item.image}
               alt="swapper-image"
-              className="w-full  m-auto rounded-[20px] object-cover max-xs:h-[200px] max-sm:h-[270px] md:h-[330px] lg:h-[390px]"
+              className="w-full  m-auto rounded-[20px] object-cover max-xs:h-[200px] max-sm:h-[270px] md:h-[330px] lg:h-[400px]"
               priority
             />
           </SwiperSlide>

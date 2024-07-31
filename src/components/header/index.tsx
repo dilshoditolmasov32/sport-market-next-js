@@ -27,10 +27,7 @@ const Index = () => {
       title: "Продукты",
       url: "/products",
     },
-    {
-      title: "Контакты",
-      url: "/contact",
-    },
+  
     {
       title: "Оплата и Доставка",
       url: "/delivery",
@@ -49,6 +46,11 @@ const Index = () => {
     setOpen(true);
   };
 
+
+  const handleClickBasket=()=>{
+      console.log("cart")
+    
+  }
   return (
     <>
       <Login open={open} setOpen={setOpen} />
@@ -202,12 +204,11 @@ const Index = () => {
                   <Image src={like} alt="like" />
                 </button>
               </Link>
-              <Link href={"basket"}>
-                <button className="flex items-center gap-[5px] text-[20px] font-Fira Sans py-[12px] px-[30px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px] text-[#1F1D14]">
+                <button className="flex items-center gap-[5px] text-[20px] font-Fira Sans py-[12px] px-[30px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px] text-[#1F1D14]"
+                 onClick={handleClickBasket}>
                   <Image src={cart} alt="cart" />
                   Корзина
                 </button>
-              </Link>
             </div>
           </div>
         </div>

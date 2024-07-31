@@ -1,11 +1,12 @@
 "use client";
-
+import { useState } from "react";
 import Image from "next/image";
 import { TextField } from "@mui/material";
 import { product2, product4, delete_icon, click, payme } from "@images";
 import { KartaModal, MapModal, MessageModal, SuccessModal } from "@/components";
 
 const Index = () => {
+  const [count, setCount]=useState(1)
   const data = [
     {
       id: 1,
@@ -35,6 +36,9 @@ const Index = () => {
 
   const handleSubmit = (values: unknown) => {
     console.log(values);
+  };
+  const   handleCounter = (id: number) => {
+   setCount(prev=>prev+1)
   };
 
   return (
@@ -71,18 +75,22 @@ const Index = () => {
                         </p>
                         <div className="flex gap-[40px] mt-[25px] ">
                           <div className="flex items-center gap-[9px]  ">
-                            <button className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center">
+                            <button 
+                            onClick={()=>setCount((prev)=>prev-1)}
+                            className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center">
                               -
                             </button>
                             <span className="text-[20px] text-black font-Fira Sans">
-                              1
+                             {count}
                             </span>
-                            <button className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center">
+                            <button
+                              onClick={(id)=>handleCounter(item.id)}
+                            className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center">
                               +
                             </button>
                           </div>
                           <h3 className="text-[#000] text-[22px] font-semibold">
-                            {item.price}{" "}
+                            {item.price*count}
                             <span className="text-[#1F1D14] text-[16px]">
                               uzs
                             </span>
