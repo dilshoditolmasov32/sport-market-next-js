@@ -41,7 +41,6 @@ const Index = () => {
                   value={value}
                   onChange={(e) => handleChange(e, index)}
                   onKeyDown={(e) => handleKeyDown(e, index)}
-                  ref={(el) => (inputRefs.current[index] = el)}
                   className="outline-none w-full h-[30px] bg-[#F2F2F2] text-[20px] text-center"
                   maxLength={1}
                 />
