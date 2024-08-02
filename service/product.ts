@@ -5,7 +5,18 @@ export const getProductsData = async (params: unknown) => {
     const response = await API_URL.get("/products", { params });
     return response?.data?.products;
   } catch (error) {
-    console.log(error)
-    return null
+    console.log(error);
+    return null;
+  }
+};
+
+export const singleProductData = async (id: string | undefined | null) => {
+  try {
+    const response = await API_URL.get(`/product/${id}`);
+    console.log(response)
+    return response?.data;
+  } catch (error) {
+    console.error( error);
+    return null;
   }
 };

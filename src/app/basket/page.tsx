@@ -4,9 +4,34 @@ import Image from "next/image";
 import { TextField } from "@mui/material";
 import { product2, product4, delete_icon, click, payme } from "@images";
 import { KartaModal, MapModal, MessageModal, SuccessModal } from "@/components";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { styled } from "@mui/system";
+import { useMask } from '@react-input/mask';
+import Stack from "@mui/material/Stack";
+import { korzinkaValidationSchema } from "@/utils/validation";
 
 const Index = () => {
-  const [count, setCount]=useState(1)
+  const CustomTextField = styled(TextField)({
+    "& label.Mui-focused": {
+      color: "#F8B400",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "#F8B400",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#FBD029",
+      },
+      "&:hover fieldset": {
+        borderColor: "#FBD029",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#F8B400",
+      },
+    },
+  });
+
+  const [count, setCount] = useState(1);
   const data = [
     {
       id: 1,
@@ -37,9 +62,22 @@ const Index = () => {
   const handleSubmit = (values: unknown) => {
     console.log(values);
   };
-  const   handleCounter = (id: number) => {
-   setCount(prev=>prev+1)
+  const handleCounter = (id: number) => {
+    setCount((prev) => prev + 1);
   };
+
+  interface korzinkaPropsType {
+    full_name: string;
+    phone_number: string | number;
+    address: string;
+  }
+
+  const initialValues: korzinkaPropsType = {
+    full_name: "",
+    phone_number: "",
+    address: "",
+  };
+  const inputRef = useMask({ mask: '+998 (___) ___-__-__', replacement: { _: /\d/ } });
 
   return (
     <>
@@ -75,22 +113,24 @@ const Index = () => {
                         </p>
                         <div className="flex gap-[40px] mt-[25px] ">
                           <div className="flex items-center gap-[9px]  ">
-                            <button 
-                            onClick={()=>setCount((prev)=>prev-1)}
-                            className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center">
+                            <button
+                              onClick={() => setCount((prev) => prev - 1)}
+                              className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center"
+                            >
                               -
                             </button>
                             <span className="text-[20px] text-black font-Fira Sans">
-                             {count}
+                              {count}
                             </span>
                             <button
-                              onClick={(id)=>handleCounter(item.id)}
-                            className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center">
+                              onClick={(id) => handleCounter(item.id)}
+                              className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center"
+                            >
                               +
                             </button>
                           </div>
                           <h3 className="text-[#000] text-[22px] font-semibold">
-                            {item.price*count}
+                            {item.price * count}
                             <span className="text-[#1F1D14] text-[16px]">
                               uzs
                             </span>
@@ -139,78 +179,84 @@ const Index = () => {
               <h4 className="my-6 text-[20px] font-bold text-[#1F1D14]">
                 Ваши данные
               </h4>
-              <form onSubmit={handleSubmit}>
-                <p className="mb-2 text-[#1F1D14] ">Имя /Фамиля</p>
-                <TextField
-                  fullWidth
-                  sx={{
-                    backgroundColor: "#f2f2f2",
-                    outline: "none",
-                    borderColor: "#f2f2f2",
-                    color: "#1F1D14",
-                    fontSize: "20px",
-                    lineHeight: "24px",
-                    border: "none",
-                    marginBottom: "16px",
-                  }}
-                  label={"Имя /Фамиля"}
-                  autoFocus={false}
-                />
-                <p className="mb-2 text-[#1F1D14] ">Ваш номер</p>
-                <TextField
-                  fullWidth
-                  sx={{
-                    backgroundColor: "#f2f2f2",
-                    outline: "none",
-                    borderColor: "#f2f2f2",
-                    color: "#1F1D14",
-                    fontSize: "20px",
-                    lineHeight: "24px",
-                    border: "none",
-                    marginBottom: "16px",
-                  }}
-                  label={"+998 __ ___ __ __"}
-                  type="number"
-                />
 
-                <p className="mb-2 text-[#1F1D14] ">Адрес доставки</p>
-                <TextField
-                  fullWidth
-                  sx={{
-                    backgroundColor: "#f2f2f2",
-                    outline: "none",
-                    borderColor: "#f2f2f2",
-                    color: "#1F1D14",
-                    fontSize: "20px",
-                    lineHeight: "24px",
-                    border: "none",
-                    marginBottom: "16px",
-                  }}
-                  label={"Область/город/улица/дом"}
-                  autoFocus={false}
-                />
-                <h4 className="my-6 text-[20px] font-bold text-[#1F1D14] ">
+              <Formik
+                initialValues={initialValues}
+                validationSchema={korzinkaValidationSchema}
+                onSubmit={handleSubmit}
+              >
+                <Form>
+                  <Stack spacing={2}>
+                    <p className=" text-[#1F1D14] ">Имя /Фамиля</p>
+                    <Field
+                      name="full_name"
+                      type="text"
+                      label="Имя /Фамиля"
+                      as={CustomTextField}
+                      variant="outlined"
+                      helperText={
+                        <ErrorMessage
+                          name="full_name"
+                          component="p"
+                          className="text-[red] text-[15px]"
+                        />
+                      }
+                    />
+                    <p className=" text-[#1F1D14] ">Ваш номер</p>
+                    <Field
+                      name="phone_number"
+                      type="text"
+                      label="+998 __ ___ __ __"
+                      as={CustomTextField}
+                      variant="outlined"
+                      ref={inputRef}
+                      helperText={
+                        <ErrorMessage
+                          name="phone_number"
+                          component="p"
+                          className="text-[red] text-[15px]"
+                        />
+                      }
+                    />
+                    <p className=" text-[#1F1D14] ">Адрес доставки</p>
+
+                    <Field
+                      name="address"
+                      type="text"
+                      label="Область/город/улица/дом"
+                      as={CustomTextField}
+                      variant="outlined"
+                      helperText={
+                        <ErrorMessage
+                          name="address"
+                          component="p"
+                          className="text-[red] text-[15px]"
+                        />
+                      }
+                    />
+                  </Stack>
+                  <h4 className="my-6 text-[20px] font-bold text-[#1F1D14]">
                   Тип оплаты
-                </h4>
-                <div className="flex flex-wrap gap-4 max-xs:flex max-xs:justify-between ">
-                  <button className="py-[17px] px-[25px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center ">
-                    <Image src={click} alt="click_icon" />
+                  </h4>
+                  <div className="flex flex-wrap gap-4 max-xs:flex max-xs:justify-between ">
+                    <button className="py-[17px] px-[25px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center ">
+                      <Image src={click} alt="click_icon" />
+                    </button>
+                    <button className="py-[17px] px-[25px] bg-[#F2F2F2] rounded-[8px] w-[130px]  flex justify-center items-center">
+                      <Image src={payme} alt="payme_icon" />
+                    </button>
+                    <button className="py-[17px] px-[15px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center">
+                      Через карту
+                    </button>
+                    <button className="py-[17px] px-[25px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center text-center ">
+                      Банковский счёт
+                    </button>
+                  </div>
+                  <button className="py-[20px]  my-10 px-[30px] max-w-[424px] w-full bg-[#FBD029] rounded-[5px] text-[24px] font-bold max-lg:w-full ">
+                    Купить
                   </button>
-                  <button className="py-[17px] px-[25px] bg-[#F2F2F2] rounded-[8px] w-[130px]  flex justify-center items-center">
-                    <Image src={payme} alt="payme_icon" />
-                  </button>
-                  <button className="py-[17px] px-[15px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center">
-                    Через карту
-                  </button>
-                  <button className="py-[17px] px-[25px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center text-center ">
-                    Банковский счёт
-                  </button>
-                </div>
-
-                <button className="py-[20px]  my-10 px-[30px] max-w-[424px] w-full bg-[#FBD029] rounded-[5px] text-[24px] font-bold max-lg:w-full ">
-                  Купить
-                </button>
-              </form>
+                </Form>
+              </Formik>
             </div>
           </div>
         </div>

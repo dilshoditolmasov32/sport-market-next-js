@@ -1,6 +1,4 @@
 "use client";
-
-
 import { share, print } from "@images";
 import Image from "next/image";
 import { ActionProduct } from "@/components";

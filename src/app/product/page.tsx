@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Select } from "antd";
+import { Select, Breadcrumb } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import { Slider } from "@mui/material";
 import { ActionProduct, Skeleton } from "@/components";
@@ -17,31 +18,15 @@ import {
   product4,
 } from "@images";
 import Link from "next/link";
+import { Product } from "../../../types/product";
 
 const Index = () => {
+  const defaultImage = 'https://placebear.com/250/200';
   const [params, setParams] = useState({
     page: 1,
     limit: 5,
   });
 
-  interface Product {
-    age_max: number;
-    age_min: number;
-    product_id: string;
-    product_name: string;
-    category_id: string;
-    description: string;
-    made_in: string;
-    color: string[];
-    image_url: string[];
-    size: string[];
-    count: number;
-    cost: number;
-    discount: number;
-    for_gender: string;
-    liked: boolean;
-    basket: boolean;
-  }
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
@@ -82,20 +67,54 @@ const Index = () => {
     setSecondCity(value);
   };
 
-  const [value, setValue] = useState<number[]>([10, 40]);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    console.log(newValue);
-    setValue(newValue as number[]);
-  };
-
+  const [value, setValue] = useState<number[]>([20, 37])
+  const minDistance = 10;
   function valuetext(value: number) {
-    return `${value}°C`;
+    console.log(value)
+    return value;
   }
+
+
+  const handleChange = (
+    event: Event,
+    newValue: number | number[],
+    activeThumb: number,
+  ) => {
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+
+    if (activeThumb === 0) {
+      setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
+    } else {
+      setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
+    }
+  };
   return (
     <>
       <div className="pt-5">
         <div className="container">
+        <Breadcrumb
+          items={[
+            {
+              href: "/",
+              title: (
+                <div className="flex items-center gap-[10px]  hover:bg-none">
+                  <HomeOutlined />
+                  <span  className="text-[#000] font-Fira Sans text-[16px] opacity-60">Главная</span>
+                </div>
+              ),
+            },
+            {
+              title: (
+                <>
+                <p className="text-[#1F1D14] text-[17px]" >Продукты</p>
+                </>
+              )
+            },
+          ]}
+          className="my-5 flex items-center"
+        />
           <div className="flex gap-6 md:gap-4  max-md:grid max-md:grid-cols-1">
             <div>
               <div className="bg-white xl:w-[292px]  rounded-[8px] px-[18px] pt-[19px] pb-[38px] md:w-[260px] max-md:w-full ">
@@ -111,12 +130,12 @@ const Index = () => {
                   </label>
                   <div className="bg-[#F2F2F2] mt-[10px] py-[12px] px-5 rounded-[5px] mb-[16px]">
                     <Slider
-                      getAriaLabel={() => "Temperature range"}
+                       getAriaLabel={() => 'Minimum distance'}
                       value={value}
                       onChange={handleChange}
                       valueLabelDisplay="auto"
+                      disableSwap
                       sx={{ color: "#FBD029", height: "4px" }}
-                      getAriaValueText={valuetext}
                     />
 
                     <div className="flex text-[000000] gap-16 font-bold text-[14px]">
@@ -261,7 +280,11 @@ const Index = () => {
                           <Image
                             width={250}
                             height={190}
-                            src={item.image_url[0]}
+                            src={
+                              item.image_url && item.image_url.length > 0
+                                ? item.image_url[0]
+                                : defaultImage
+                            }
                             alt="product_image"
                             className="pl-[30px] pr-5"
                           />

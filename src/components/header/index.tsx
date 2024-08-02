@@ -25,7 +25,7 @@ const Index = () => {
   const links = [
     {
       title: "Продукты",
-      url: "/products",
+      url: "/product",
     },
   
     {

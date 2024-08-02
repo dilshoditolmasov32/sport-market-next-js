@@ -11,3 +11,14 @@ export const signInValidationSchema = Yup.object().shape({
     )
     .required("Parolni kiriting"),
 });
+
+//==============   BASKET   =================
+
+export const korzinkaValidationSchema = Yup.object().shape({
+  full_name: Yup.string().required("Ismi familyangizni kiriting"),
+  phone_number: Yup.string()
+    .min(18, "Telefon raqam yaroqsiz")
+    .required("Telefon raqamingizni kiriting"),
+    address: Yup.string().required("Yetkazib berish manzilini kiriting"),
+});
+   

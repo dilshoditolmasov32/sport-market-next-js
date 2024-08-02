@@ -1,3 +1,5 @@
+import { HomeOutlined } from "@ant-design/icons";
+import { Breadcrumb } from "antd";
 import { eye, calendar } from "@images";
 import Image from "next/image";
 import { ActionProduct } from "@/components";
@@ -41,6 +43,27 @@ const Index = () => {
   return (
     <>
       <div className="container ">
+        <Breadcrumb
+          items={[
+            {
+              href: "/",
+              title: (
+                <div className="flex items-center gap-[10px]  hover:bg-none">
+                  <HomeOutlined />
+                  <span  className="text-[#000] font-Fira Sans text-[16px] opacity-60">Главная</span>
+                </div>
+              ),
+            },
+            {
+              title: (
+                <>
+                <p className="text-[#1F1D14] text-[17px]" >Полезные информации</p>
+                </>
+              )
+            },
+          ]}
+          className="my-6 flex items-center"
+        />
         <h2 className="text-[#1F1D14] text-[32px] font-Fira Sans font-bold  mt-5">
           Полезные информации
         </h2>

@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { styled } from '@mui/system';
+import { styled } from "@mui/system";
 import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
@@ -12,10 +12,12 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { signInValidationSchema } from "@/utils/validation";
 import { IAuth } from "../../../types/auth";
+import { sign_in } from "../../../service/login";
 
 const style = {
   position: "absolute" as "absolute",
@@ -31,21 +33,21 @@ const style = {
 };
 
 const CustomTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: '#F8B400', 
+  "& label.Mui-focused": {
+    color: "#F8B400",
   },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: '#F8B400',
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "#F8B400",
   },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#FBD029', 
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#FBD029",
     },
-    '&:hover fieldset': {
-      borderColor: '#FBD029', 
+    "&:hover fieldset": {
+      borderColor: "#FBD029",
     },
-    '&.Mui-focused fieldset': {
-      borderColor: '#F8B400', 
+    "&.Mui-focused fieldset": {
+      borderColor: "#F8B400",
     },
   },
 });
@@ -56,15 +58,16 @@ interface SignInProps {
 }
 
 const initialValues: IAuth = {
-  email: "",
-  password: "",
+  email: "xasannosirov094@gmail.com",
+  password: "Sehtols@01",
 };
 
 const SignInModal: React.FC<SignInProps> = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (values: unknown) => {
-    console.log(values);
+  const handleSubmit = async (values: IAuth) => {
+  const response = await sign_in(values)
+ console.log(response)
   };
   return (
     <div>
@@ -76,6 +79,7 @@ const SignInModal: React.FC<SignInProps> = ({ open, setOpen }) => {
             onSubmit={handleSubmit}
           >
             <Form>
+            
               <Stack spacing={3}>
                 <h3 className="text-center text-[24px] mb-5 font-bold font-Fira Sans">
                   Login orqali kirish
