@@ -18,17 +18,15 @@ import {
   menu,
 } from "@images";
 
-
 const Index = () => {
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
   const links = [
     {
       title: "Продукты",
       url: "/product",
     },
-  
+
     {
       title: "Оплата и Доставка",
       url: "/delivery",
@@ -47,11 +45,6 @@ const Index = () => {
     setOpen(true);
   };
 
-
-  const handleClickBasket=()=>{
-      console.log("savat")
-    
-  }
   return (
     <>
       <Login open={open} setOpen={setOpen} />
@@ -193,23 +186,26 @@ const Index = () => {
               </div>
             </div>
             <div className="flex items-center gap-[10px] max-md:w-full max-md:flex max-md:gap-5 max-xs:flex max-xs:justify-between ">
-             
-                <button
-                  onClick={handleOpen}
-                  className="flex items-center py-[13px] px-[13px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px]"
-                >
-                  <Image src={user} alt="user" />
-                </button>
+              <button
+                onClick={handleOpen}
+                className="flex items-center py-[13px] px-[13px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px]"
+              >
+                <Image src={user} alt="user" />
+              </button>
               <Link href={"wishlist"}>
                 <button className="flex items-center py-[13px] px-[13px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px] text-[#1F1D14] ml-[13px] mr-[25px]">
                   <Image src={like} alt="like" />
                 </button>
               </Link>
-                <button className="flex items-center gap-[5px] text-[20px] font-Fira Sans py-[12px] px-[30px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px] text-[#1F1D14]"
-                 onClick={handleClickBasket}>
-                  <Image src={savat} alt="cart" />
-                  Корзина
-                </button>
+              <Link href={"basket"}>
+              <button
+                className="flex items-center gap-[5px] text-[20px] font-Fira Sans py-[12px] px-[30px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px] text-[#1F1D14]"
+              >
+                <Image src={savat} alt="cart" />
+                Корзина
+              </button>
+              </Link>
+
             </div>
           </div>
         </div>

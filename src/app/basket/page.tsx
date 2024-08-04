@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { TextField } from "@mui/material";
 import { product2, product4, delete_icon, click, payme } from "@images";
@@ -9,8 +9,28 @@ import { styled } from "@mui/system";
 import { useMask } from "@react-input/mask";
 import Stack from "@mui/material/Stack";
 import { korzinkaValidationSchema } from "@/utils/validation";
+import { korzinkaPropsType, Product } from "@types";
+import { getBasketProduct } from "../../../service/basket";
 
 const Index = () => {
+  const [basket, setBasket] = useState<Product[]>([]);
+  useEffect(() => {
+    const fetData = async () => {
+      const response = await getBasketProduct();
+      console.log(response);
+      if (response) {
+        setBasket(response);
+      }
+    };
+
+    fetData();
+  }, []);
+
+  useEffect(() => {
+    console.log(basket);
+
+    basket?.map((item) => console.log(item.product_id));
+  }, [basket]);
   const CustomTextField = styled(TextField)({
     "& label.Mui-focused": {
       color: "#F8B400",
@@ -62,15 +82,9 @@ const Index = () => {
   const handleSubmit = (values: unknown) => {
     console.log(values);
   };
-  const handleCounter = (id: number) => {
+  const handleCounter = (product_id:string | number) => {
     setCount((prev) => prev + 1);
   };
-
-  interface korzinkaPropsType {
-    full_name: string;
-    phone_number: string | number;
-    address: string;
-  }
 
   const initialValues: korzinkaPropsType = {
     full_name: "",
@@ -97,20 +111,22 @@ const Index = () => {
                 </button>
               </div>
               <div>
-                {data?.map((item) => (
+                {basket?.map((item) => (
                   <div
-                    key={item.id}
+                    key={item.product_id}
                     className="flex justify-between p-[10px] mt-[10px] w-full bg-[#F2F2F2] rounded-[8px] mb-[10px]"
                   >
-                    <div className="flex max-lg:flex max-lg:gap-10 max-sm:flex max-sm:gap-5 max-xs:grid max-xs:grid-cols-1 max-xs:p-5 ">
+                    <div className="flex max-lg:flex max-lg:gap-10 max-sm:flex max-sm:gap-5 lg:gap-6 max-xs:grid max-xs:grid-cols-1 max-xs:p-5 ">
                       <div>
                         <Image
-                          src={item.image}
+                          width={145}
+                          height={180}
+                          src={item?.image_url[0]}
                           alt="product_image"
                           className="w-[145px] h-[120px] max-lg:w-[180px] max-lg:h-auto max-sm:w-auto max-sm:h-auto max-xs:w-[140px]"
                         />
                       </div>
-                      <div className="">
+                      <div >
                         <p className="text-[#1F1D14] text-[20px] font-Fira Sans max-w-[292px] ">
                           {item.product_name}
                         </p>
@@ -126,14 +142,14 @@ const Index = () => {
                               {count}
                             </span>
                             <button
-                              onClick={(id) => handleCounter(item.id)}
+                              onClick={(product_id) => handleCounter(item.product_id)}
                               className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center"
                             >
                               +
                             </button>
                           </div>
                           <h3 className="text-[#000] text-[22px] font-semibold">
-                            {item.price * count}
+                            {item.cost * count}
                             <span className="text-[#1F1D14] text-[16px]">
                               uzs
                             </span>

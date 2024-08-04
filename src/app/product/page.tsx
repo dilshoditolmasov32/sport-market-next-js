@@ -41,7 +41,7 @@ const Index = () => {
   const addToCart = async (item: Product) => {
     const payload = { ...item, productId: item.product_id };
     const response = await saveBasketProduct(payload.productId);
-    
+
     if (response === false) {
       toast.success("Mahsulot savatga qo'shildi!", {
         position: "top-center",
@@ -52,7 +52,7 @@ const Index = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
     }
   };
 
@@ -266,7 +266,7 @@ const Index = () => {
                 <div className="gap-6 xl:grid xl:grid-cols-3 lg:grid lg:grid-cols-3 md:grid md:grid-cols-2 max-md:block sm:grid sm:grid-cols-2 sm:mt-6 sm:justify-items-center xs:grid xs:grid-cols-2">
                   {products?.map((item) => (
                     <div
-                      className="pt-[25px] rounded-[5px] bg-white max-w-[292px] w-full relative max-xs:max-w-[440px] max-xs:w-full max-xs:mt-5"
+                      className="pt-[15px] rounded-[5px] bg-white max-w-[292px]  w-full relative max-xs:max-w-[440px] max-xs:w-full max-xs:mt-5"
                       key={item.product_id}
                     >
                       <div className="absolute top-[10px] right-[14px]">
@@ -274,21 +274,22 @@ const Index = () => {
                           <Image src={like} alt="like" />
                         </button>
                       </div>
-                      <div className="max-xs:flex max-xs:justify-center mx-[25px]">
+                      <div className="max-xs:flex max-xs:justify-center mx-[25px] w-full h-[190px] overflow-hidden  py-5 ">
                         <Link href={`product/${item.product_id}`}>
                           <Image
                             width={250}
-                            height={190}
+                            height={200}
+                          
                             src={
                               item.image_url && item.image_url.length > 0
                                 ? item.image_url[0]
                                 : defaultImage
                             }
                             alt="product_image"
-                            className="pl-[30px] pr-5"
                           />
                         </Link>
                       </div>
+
                       <p className="ml-[30px] pr-5 mb-3 mt-5 text-[20px] max-sm:pr-3 font-bold">
                         {item.product_name}
                       </p>

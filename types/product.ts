@@ -7,7 +7,7 @@ export interface Product {
     description: string;
     made_in: string;
     color: string[];
-    image_url: string[] | null;
+    image_url: string[]  ;
     size: string[];
     count: number;
     cost: number;
