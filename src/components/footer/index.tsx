@@ -9,6 +9,7 @@ import {
   telegram,
   facebook,
 } from "@images";
+
 const Index = () => {
   return (
     <>

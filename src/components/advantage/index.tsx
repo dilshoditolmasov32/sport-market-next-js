@@ -1,5 +1,6 @@
 import { check, check2, aksiya, taksi } from "@images"
 import Image from "next/image"
+
 const Index = () => {
     const boxs=[
         {

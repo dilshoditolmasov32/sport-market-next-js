@@ -1,7 +1,7 @@
-import { HomeOutlined } from "@ant-design/icons";
 import { Breadcrumb } from "antd";
-import { eye, calendar } from "@images";
+import { HomeOutlined } from "@ant-design/icons";
 import Image from "next/image";
+import { eye, calendar } from "@images";
 import { ActionProduct } from "@/components";
 
 const Index = () => {
@@ -50,16 +50,20 @@ const Index = () => {
               title: (
                 <div className="flex items-center gap-[10px]  hover:bg-none">
                   <HomeOutlined />
-                  <span  className="text-[#000] font-Fira Sans text-[16px] opacity-60">Главная</span>
+                  <span className="text-[#000] font-Fira Sans text-[16px] opacity-60">
+                    Главная
+                  </span>
                 </div>
               ),
             },
             {
               title: (
                 <>
-                <p className="text-[#1F1D14] text-[17px]" >Полезные информации</p>
+                  <p className="text-[#1F1D14] text-[17px]">
+                    Полезные информации
+                  </p>
                 </>
-              )
+              ),
             },
           ]}
           className="my-6 flex items-center"

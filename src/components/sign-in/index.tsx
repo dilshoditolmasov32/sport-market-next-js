@@ -1,23 +1,18 @@
 "use client";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import {  useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { styled } from "@mui/system";
 import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
-import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { signInValidationSchema } from "@/utils/validation";
-import { IAuth } from "../../../types/auth";
-import { sign_in } from "../../../service/login";
+import { IAuth } from "@types";
+import { sign_in } from "@service";
 
 const style = {
   position: "absolute" as "absolute",

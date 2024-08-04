@@ -5,8 +5,8 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Image from "next/image";
 import "./swiper.css";
+import Image from "next/image";
 import { swapper1, swapper2, swapper3, swapper4, swapper5 } from "@images";
 
 export default function Swipper() {

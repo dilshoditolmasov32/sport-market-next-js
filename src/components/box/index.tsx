@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import Image from "next/image";
 import { sport_img, eye, calendar } from "@images";
+
 const Index = () => {
   return (
     <>

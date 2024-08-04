@@ -7,7 +7,7 @@ const Index = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newCode = [...code];
-    newCode[index] = e.target.value.slice(0, 1); // Ensure only one digit is entered
+    newCode[index] = e.target.value.slice(0, 1); 
     setCode(newCode);
 
     if (e.target.value && index < 3) {
@@ -16,7 +16,6 @@ const Index = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-    // Handle backspace to move focus to the previous input
     if (e.key === 'Backspace' && index > 0 && !code[index]) {
       inputRefs.current[index - 1]?.focus();
     }

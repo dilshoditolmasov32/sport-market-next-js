@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@mui/material";
 import "./index.css";
 import Login from "../sign-in";
 import {
@@ -11,12 +13,11 @@ import {
   katalog,
   user,
   like,
-  cart,
+  savat,
   search,
   menu,
 } from "@images";
-import Image from "next/image";
-import { Button } from "@mui/material";
+
 
 const Index = () => {
   const [open, setOpen] = useState(false);
@@ -48,7 +49,7 @@ const Index = () => {
 
 
   const handleClickBasket=()=>{
-      console.log("cart")
+      console.log("savat")
     
   }
   return (
@@ -206,7 +207,7 @@ const Index = () => {
               </Link>
                 <button className="flex items-center gap-[5px] text-[20px] font-Fira Sans py-[12px] px-[30px] bg-[#F2F2F2] hover:bg-[#FBD029] transition-all  duration-300 active:bg-[#FBD029] rounded-[5px] text-[#1F1D14]"
                  onClick={handleClickBasket}>
-                  <Image src={cart} alt="cart" />
+                  <Image src={savat} alt="cart" />
                   Корзина
                 </button>
             </div>

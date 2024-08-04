@@ -6,7 +6,7 @@ import { product2, product4, delete_icon, click, payme } from "@images";
 import { KartaModal, MapModal, MessageModal, SuccessModal } from "@/components";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { styled } from "@mui/system";
-import { useMask } from '@react-input/mask';
+import { useMask } from "@react-input/mask";
 import Stack from "@mui/material/Stack";
 import { korzinkaValidationSchema } from "@/utils/validation";
 
@@ -77,7 +77,10 @@ const Index = () => {
     phone_number: "",
     address: "",
   };
-  const inputRef = useMask({ mask: '+998 (___) ___-__-__', replacement: { _: /\d/ } });
+  const inputRef = useMask({
+    mask: "+998 (___) ___-__-__",
+    replacement: { _: /\d/ },
+  });
 
   return (
     <>
@@ -236,7 +239,7 @@ const Index = () => {
                     />
                   </Stack>
                   <h4 className="my-6 text-[20px] font-bold text-[#1F1D14]">
-                  Тип оплаты
+                    Тип оплаты
                   </h4>
                   <div className="flex flex-wrap gap-4 max-xs:flex max-xs:justify-between ">
                     <button className="py-[17px] px-[25px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center ">

@@ -13,7 +13,6 @@ export const getProductsData = async (params: unknown) => {
 export const singleProductData = async (id: string | undefined | null) => {
   try {
     const response = await API_URL.get(`/product/${id}`);
-    console.log(response)
     return response?.data;
   } catch (error) {
     console.error( error);

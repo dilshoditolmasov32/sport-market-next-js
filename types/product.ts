@@ -16,3 +16,5 @@ export interface Product {
     liked: boolean;
     basket: boolean;
   } 
+
+ 

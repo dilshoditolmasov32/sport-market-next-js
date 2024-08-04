@@ -1,4 +1,4 @@
-import { product1, product2, product3, product4, like, cart, action } from "@images";
+import { product1, product2, product3, product4, like, savat, action } from "@images";
 import Image from "next/image";
 
 const Index = () => {
@@ -64,7 +64,7 @@ const Index = () => {
                   {item.price}
                 </div>
                 <button className="bg-[#FBD029] w-full hover:bg-[#f8b600e0] hover:text-[#1F1D14] transition-all duration-500 ease-linear  flex items-center justify-center gap-[6px] py-[15px] font-Fira Sans text-[20px] text-[#1F1D14] rounded-br-[5px] rounded-bl-[5px]">
-                  <Image src={cart} alt="korzinka_icon" />
+                  <Image src={savat} alt="korzinka_icon" />
                   Корзина
                 </button>
               </div>
