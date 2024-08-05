@@ -48,6 +48,7 @@ import delete_icon from "./delete_icon.svg"
 import payme from "./payme_icon.svg"
 import click from "./click_icon.svg"
 import shopping_bag from "./shopping_bag.png"
+import liked from './liked.png'
 
 
-export {logo, phone_icon, email, savat, user, like, katalog, lokatsiya, telegram, instagram, facebook, swapper1, swapper2, swapper3, swapper4, swapper5, card1,card2,card3, card4, card5,card6, product1, product2,product3,product4, nextIcon, puma,nike, adidas, reebok, icon2, taksi,check,check2, aksiya, sport_img, eye, calendar, action, board, list, search, menu, share, delete_icon , print, payme, click, shopping_bag}
+export {logo, phone_icon, email, savat, user, like, katalog, lokatsiya, telegram, instagram, facebook, swapper1, swapper2, swapper3, swapper4, swapper5, card1,card2,card3, card4, card5,card6, product1, product2,product3,product4, nextIcon, puma,nike, adidas, reebok, icon2, taksi,check,check2, aksiya, sport_img, eye, calendar, action, board, list, search, menu, share, delete_icon , print, payme, click, shopping_bag, liked}

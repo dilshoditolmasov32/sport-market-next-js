@@ -1,5 +1,5 @@
 "use client";
-import {  useState } from "react";
+import { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { styled } from "@mui/system";
 import { Modal } from "@mui/material";
@@ -13,6 +13,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { signInValidationSchema } from "@/utils/validation";
 import { IAuth } from "@types";
 import { sign_in } from "@service";
+import { saveAccessToken } from "../../../helpers/helpers";
+import { toast } from "react-toastify";
 
 const style = {
   position: "absolute" as "absolute",
@@ -61,8 +63,14 @@ const SignInModal: React.FC<SignInProps> = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (values: IAuth) => {
-  const response = await sign_in(values)
- console.log(response)
+    const response = await sign_in(values);
+    if (response?.status === 200) {
+      saveAccessToken(response?.data.access_token);
+      toast.success("Success");
+    } else {
+      toast.error("Xatolik bor, qaytadan urinib ko'ring");
+    }
+    setOpen(false);
   };
   return (
     <div>
@@ -74,7 +82,6 @@ const SignInModal: React.FC<SignInProps> = ({ open, setOpen }) => {
             onSubmit={handleSubmit}
           >
             <Form>
-            
               <Stack spacing={3}>
                 <h3 className="text-center text-[24px] mb-5 font-bold font-Fira Sans">
                   Login orqali kirish

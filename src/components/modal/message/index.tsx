@@ -1,13 +1,22 @@
-"use client"
-import React, { useState, useRef } from 'react';
+"use client";
+import { Modal } from "@mui/material";
+import React, { useState, useRef } from "react";
 
-const Index = () => {
-  const [code, setCode] = useState(['', '', '', '']);
+interface MessageModalProps {
+  visible: boolean;
+  onClose: () => void;
+}
+
+const MessageModal: React.FC<MessageModalProps> = ({ visible, onClose }) => {
+  const [code, setCode] = useState(["", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const newCode = [...code];
-    newCode[index] = e.target.value.slice(0, 1); 
+    newCode[index] = e.target.value.slice(0, 1);
     setCode(newCode);
 
     if (e.target.value && index < 3) {
@@ -15,15 +24,18 @@ const Index = () => {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-    if (e.key === 'Backspace' && index > 0 && !code[index]) {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    if (e.key === "Backspace" && index > 0 && !code[index]) {
       inputRefs.current[index - 1]?.focus();
     }
   };
 
   return (
-    <div className="">
-      <div className="container">
+    <Modal open={visible} onClose={onClose}>
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
         <div className="max-w-[504px] w-full rounded-[8px] bg-white px-8 pt-[45px] pb-4">
           <h3 className="text-[20px] text-center">
             Введите код отправленный на <br /> номер
@@ -48,13 +60,17 @@ const Index = () => {
             ))}
           </div>
           <p className="text-[#FBD029] text-center my-2">Не полусили код ?</p>
-          <button className="py-[20px] w-full my-[60px] bg-[#FBD029] rounded-[5px] text-[20px]">
+          <button
+            className="py-[20px] w-full my-[60px] bg-[#FBD029] rounded-[5px] text-[20px]"
+            type="button"
+            onClick={onClose}
+          >
             Подвердить
           </button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 
-export default Index;
+export default MessageModal;

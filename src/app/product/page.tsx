@@ -4,45 +4,47 @@ import { useEffect, useState } from "react";
 import { Select, Breadcrumb } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
 import { Slider } from "@mui/material";
-import { getProductsData, saveBasketProduct } from "@service";
+import { getProductsData, saveBasketProduct,saveLikeProduct } from "@service";
 import { Product } from "@types";
 import { ActionProduct, Skeleton } from "@/components";
-import { board, savat, like, list } from "@images";
+import { board, savat, like, list, liked } from "@images";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
 import Image from "next/image";
 
 const Index = () => {
-  const defaultImage = "https://unsplash.com/photos/250x190";
-
-  const [params, setParams] = useState({
-    page: 1,
-    limit: 5,
-  });
-
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
-  const [productId, setProductId] = useState("");
+  const [page, setPage] = useState(1);
+  const [likedProducts, setLikedProducts] = useState<{
+    [key: string]: boolean;
+  }>({});
+  // const [params, setParams] = useState({
+  //   page: 1,
+  //   limit: 3,
+  // });
+  const defaultImage = "https://unsplash.com/photos/250x190";
 
+ 
   useEffect(() => {
-    setLoading(true);
-
     const fetchData = async () => {
+      setLoading(true);
+      const params = { page, limit: 3 };
       const data = await getProductsData(params);
       if (data) {
-        setProducts(data);
+        setProducts((prevProducts) => {
+          return page === 1 ? data : [...prevProducts, ...data];
+        });
       }
       setLoading(false);
     };
 
     fetchData();
-  }, [params]);
-
+  }, [page]);
   const addToCart = async (item: Product) => {
     const payload = { ...item, productId: item.product_id };
     const response = await saveBasketProduct(payload.productId);
-
-    if (response === false) {
+    if (response === true) {
       toast.success("Mahsulot savatga qo'shildi!", {
         position: "top-center",
         autoClose: 3000,
@@ -54,6 +56,30 @@ const Index = () => {
         theme: "light",
       });
     }
+  };
+
+  const addToWishlist = async (item: Product) => {
+    const response = await saveLikeProduct(item.product_id);
+    if (response === true) {
+      setLikedProducts((prevLikedProducts) => ({
+        ...prevLikedProducts,
+        [item.product_id]: true,
+      }));
+      toast.success("Mahsulot sevimlilarga qo'shildi!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
+  const handleClick = () => {
+    setPage((prevPage) => prevPage + 1);
   };
 
   const data = {
@@ -270,8 +296,13 @@ const Index = () => {
                       key={item.product_id}
                     >
                       <div className="absolute top-[10px] right-[14px]">
-                        <button>
-                          <Image src={like} alt="like" />
+                        <button onClick={() => addToWishlist(item)}>
+                          <Image
+                            src={likedProducts[item.product_id] ? liked : like}
+                            alt="like"
+                            width={20}
+                            height={20}
+                          />
                         </button>
                       </div>
                       <div className="max-xs:flex max-xs:justify-center mx-[25px] w-full h-[190px] overflow-hidden  py-5 ">
@@ -279,7 +310,6 @@ const Index = () => {
                           <Image
                             width={250}
                             height={200}
-                          
                             src={
                               item.image_url && item.image_url.length > 0
                                 ? item.image_url[0]
@@ -318,8 +348,11 @@ const Index = () => {
                   ))}
                 </div>
               )}
-              <button className="w-full py-[15px] mt-[50px] px-10 bg-white rounded-[5px] text-[20px] hover:bg-[#FBD029] hover:text-[#1F1D14] transition-all duration-500 ease-linear">
-                Показать ещё
+              <button 
+              className="w-full py-[15px] mt-[50px] px-10 bg-white rounded-[5px] text-[20px] hover:bg-[#FBD029] hover:text-[#1F1D14] transition-all duration-500 ease-linear"
+              onClick={handleClick}
+              >
+                Показать ещё 3
               </button>
             </div>
           </div>

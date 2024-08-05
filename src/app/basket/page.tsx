@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { TextField } from "@mui/material";
-import { product2, product4, delete_icon, click, payme } from "@images";
-import { KartaModal, MapModal, MessageModal, SuccessModal } from "@/components";
+import {  delete_icon, click, payme } from "@images";
+import { KartaModal, MapModal, SuccessModal } from "@/components";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { styled } from "@mui/system";
 import { useMask } from "@react-input/mask";
@@ -14,23 +14,25 @@ import { getBasketProduct } from "../../../service/basket";
 
 const Index = () => {
   const [basket, setBasket] = useState<Product[]>([]);
+  const [open, setOpen] = useState(false);
+  const [counts, setCounts] = useState<{ [key: string]: number }>({});
+
   useEffect(() => {
     const fetData = async () => {
       const response = await getBasketProduct();
-      console.log(response);
       if (response) {
         setBasket(response);
+        const initialCounts = response.reduce((acc: any, item: any) => {
+          acc[item.product_id] = 1;
+          return acc;
+        }, {});
+        setCounts(initialCounts);
       }
     };
 
     fetData();
   }, []);
 
-  useEffect(() => {
-    console.log(basket);
-
-    basket?.map((item) => console.log(item.product_id));
-  }, [basket]);
   const CustomTextField = styled(TextField)({
     "& label.Mui-focused": {
       color: "#F8B400",
@@ -51,39 +53,15 @@ const Index = () => {
     },
   });
 
-  const [count, setCount] = useState(1);
-  const data = [
-    {
-      id: 1,
-      image: product2,
-      product_name: "Гантель виниловая, 2 х 3 кг Гантель ",
-      price: 300000,
-    },
-    {
-      id: 2,
-      image: product4,
-      product_name: "Гантель виниловая, 2 х 3 кг Гантель ",
-      price: 220000,
-    },
-    {
-      id: 3,
-      image: product2,
-      product_name: "Гантель виниловая, 2 х 3 кг Гантель ",
-      price: 300000,
-    },
-    {
-      id: 4,
-      image: product4,
-      product_name: "Гантель виниловая, 2 х 3 кг Гантель ",
-      price: 350000,
-    },
-  ];
-
   const handleSubmit = (values: unknown) => {
     console.log(values);
   };
-  const handleCounter = (product_id:string | number) => {
-    setCount((prev) => prev + 1);
+
+  const handleCounter = (product_id: string | number, increment: boolean) => {
+    setCounts((prev) => ({
+      ...prev,
+      [product_id]: increment ? prev[product_id] + 1 : prev[product_id] - 1,
+    }));
   };
 
   const initialValues: korzinkaPropsType = {
@@ -91,11 +69,15 @@ const Index = () => {
     phone_number: "",
     address: "",
   };
+
   const inputRef = useMask({
     mask: "+998 (___) ___-__-__",
     replacement: { _: /\d/ },
   });
 
+  const handleKartaSubmit = () => {
+    setOpen(true);
+  };
   return (
     <>
       <div>
@@ -126,30 +108,34 @@ const Index = () => {
                           className="w-[145px] h-[120px] max-lg:w-[180px] max-lg:h-auto max-sm:w-auto max-sm:h-auto max-xs:w-[140px]"
                         />
                       </div>
-                      <div >
+                      <div>
                         <p className="text-[#1F1D14] text-[20px] font-Fira Sans max-w-[292px] ">
                           {item.product_name}
                         </p>
                         <div className="flex gap-[40px] mt-[25px] ">
                           <div className="flex items-center gap-[9px]  ">
                             <button
-                              onClick={() => setCount((prev) => prev - 1)}
+                              onClick={() =>
+                                handleCounter(item.product_id, false)
+                              }
                               className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center"
                             >
                               -
                             </button>
                             <span className="text-[20px] text-black font-Fira Sans">
-                              {count}
+                              {counts[item.product_id]}
                             </span>
                             <button
-                              onClick={(product_id) => handleCounter(item.product_id)}
+                              onClick={() =>
+                                handleCounter(item.product_id, true)
+                              }
                               className="w-[32px] h-[32px] bg-white rounded-[50%] text-[32px] flex justify-center items-center"
                             >
                               +
                             </button>
                           </div>
                           <h3 className="text-[#000] text-[22px] font-semibold">
-                            {item.cost * count}
+                            {item.cost * counts[item.product_id]}
                             <span className="text-[#1F1D14] text-[16px]">
                               uzs
                             </span>
@@ -228,7 +214,7 @@ const Index = () => {
                       label="+998 __ ___ __ __"
                       as={CustomTextField}
                       variant="outlined"
-                      ref={inputRef}
+                      inputRef={inputRef}
                       helperText={
                         <ErrorMessage
                           name="phone_number"
@@ -264,7 +250,10 @@ const Index = () => {
                     <button className="py-[17px] px-[25px] bg-[#F2F2F2] rounded-[8px] w-[130px]  flex justify-center items-center">
                       <Image src={payme} alt="payme_icon" />
                     </button>
-                    <button className="py-[17px] px-[15px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center">
+                    <button
+                      className="py-[17px] px-[15px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center"
+                      onClick={handleKartaSubmit}
+                    >
                       Через карту
                     </button>
                     <button className="py-[17px] px-[25px] bg-[#F2F2F2] rounded-[8px] w-[130px] flex justify-center items-center text-center ">
@@ -281,10 +270,9 @@ const Index = () => {
         </div>
       </div>
 
-      <KartaModal />
-      <br />
-      <br />
-      <MessageModal />
+      <KartaModal open={open} setOpen={setOpen} />
+     
+     
       <br />
       <br />
       <SuccessModal />
