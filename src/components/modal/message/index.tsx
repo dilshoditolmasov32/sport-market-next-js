@@ -1,4 +1,5 @@
 "use client";
+import { SuccessModal } from "@/components";
 import { Modal } from "@mui/material";
 import React, { useState, useRef } from "react";
 
@@ -9,6 +10,7 @@ interface MessageModalProps {
 
 const MessageModal: React.FC<MessageModalProps> = ({ visible, onClose }) => {
   const [code, setCode] = useState(["", "", "", ""]);
+  const [open, setOpen]=useState(false)
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleChange = (
@@ -32,10 +34,15 @@ const MessageModal: React.FC<MessageModalProps> = ({ visible, onClose }) => {
       inputRefs.current[index - 1]?.focus();
     }
   };
+  const handleClick = () => {
+    setOpen(true);
+  };
 
   return (
-    <Modal open={visible} onClose={onClose}>
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+   <>
+   <SuccessModal open={open} setOpen={setOpen}/>
+   <Modal open={visible} onClose={onClose}>
+      <div className="fixed inset-0 flex items-center justify-center ">
         <div className="max-w-[504px] w-full rounded-[8px] bg-white px-8 pt-[45px] pb-4">
           <h3 className="text-[20px] text-center">
             Введите код отправленный на <br /> номер
@@ -63,13 +70,14 @@ const MessageModal: React.FC<MessageModalProps> = ({ visible, onClose }) => {
           <button
             className="py-[20px] w-full my-[60px] bg-[#FBD029] rounded-[5px] text-[20px]"
             type="button"
-            onClick={onClose}
+            onClick={handleClick}
           >
             Подвердить
           </button>
         </div>
       </div>
     </Modal>
+   </>
   );
 };
 

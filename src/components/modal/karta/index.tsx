@@ -1,7 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { Modal, TextField } from "@mui/material";
+import { Modal, styled, TextField } from "@mui/material";
 import { MessageModal } from "@/components";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup"; // Add this line to use Yup for validation
+import { kartaPropsType } from "@types";
 
 interface KartaModalProps {
   open: boolean;
@@ -9,23 +12,36 @@ interface KartaModalProps {
 }
 
 const Index: React.FC<KartaModalProps> = ({ open, setOpen }) => {
-  const [cardNumber, setCardNumber] = useState("");
   const [visible, setVisible] = useState(false);
 
-  const formatCardNumber = (value: string) => {
-    const sanitizedValue = value.replace(/\D/g, "");
-    const formattedValue = sanitizedValue.replace(/(.{4})/g, "$1 ").trim();
-    return formattedValue;
+  const CustomTextField = styled(TextField)({
+    "& label.Mui-focused": {
+      color: "#F8B400",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "#F8B400",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#FBD029",
+      },
+      "&:hover fieldset": {
+        borderColor: "#FBD029",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#F8B400",
+      },
+    },
+  });
+
+  
+
+  const initialValues: kartaPropsType = {
+    number: "",
+    cardDate: "",
   };
 
-  const handleCardNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const formattedValue = formatCardNumber(event.target.value);
-    setCardNumber(formattedValue);
-  };
-
-  const handleClick = () => {
+  const handleSubmit = (values: kartaPropsType) => {
     setVisible(open);
   };
 
@@ -46,35 +62,52 @@ const Index: React.FC<KartaModalProps> = ({ open, setOpen }) => {
                 Ваши карта данные
               </h3>
 
-              <form>
-                <p className="mb-2">Номер карты</p>
-                <TextField
-                  fullWidth
-                  label="1234 5678 9012 3456"
-                  id="cardNumber"
-                  type="text"
-                  name="number"
-                  value={cardNumber}
-                  onChange={handleCardNumberChange}
-                  className="mb-4"
-                  inputProps={{ maxLength: 19 }}
-                />
-                <p className="mb-2">Срок карты</p>
-                <TextField
-                  id="cardExpiry"
-                  label="MM/YY"
-                  name="expiry"
-                  className="mb-4"
-                />
+              <Formik
+                initialValues={initialValues}
+                onSubmit={handleSubmit}
+              >
+                <Form>
+                  <p className="mb-2">Номер карты</p>
+                  <Field
+                    fullWidth
+                    id="cardNumber"
+                    type="text"
+                    name="number"
+                    label="1234 5678 9012 3456"
+                    as={CustomTextField}
+                    variant="outlined"
+                    inputProps={{ maxLength: 19 }}
+                  />
+                  <ErrorMessage
+                    name="number"
+                    component="p"
+                    className="text-[red] text-[15px]"
+                  />
 
-                <button
-                  className="py-[20px] w-full my-[30px] bg-[#FBD029] rounded-[5px] text-[20px] font-bold"
-                  onClick={handleClick}
-                  type="button"
-                >
-                  Оплатить
-                </button>
-              </form>
+                  <p className="mb-2">Срок карты</p>
+                  <Field
+                    id="cardExpiry"
+                    label="MM/YY"
+                    name="cardDate"
+                    as={CustomTextField}
+                    variant="outlined"
+                    inputProps={{ maxLength: 4 }}
+                  />
+                  <ErrorMessage
+                    name="cardDate"
+                    component="p"
+                   
+                    className="text-[red] text-[15px]"
+                  />
+
+                  <button
+                    className="py-[20px] w-full my-[30px] bg-[#FBD029] rounded-[5px] text-[20px] font-bold"
+                    type="submit"
+                  >
+                    Оплатить
+                  </button>
+                </Form>
+              </Formik>
             </div>
           </div>
         </Modal>

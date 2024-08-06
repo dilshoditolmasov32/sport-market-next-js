@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Select, Breadcrumb } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
 import { Slider } from "@mui/material";
-import { getProductsData, saveBasketProduct,saveLikeProduct } from "@service";
+import { getProductsData, saveBasketProduct, saveLikeProduct } from "@service";
 import { Product } from "@types";
 import { ActionProduct, Skeleton } from "@/components";
 import { board, savat, like, list, liked } from "@images";
@@ -25,7 +25,6 @@ const Index = () => {
   // });
   const defaultImage = "https://unsplash.com/photos/250x190";
 
- 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -305,18 +304,21 @@ const Index = () => {
                           />
                         </button>
                       </div>
-                      <div className="max-xs:flex max-xs:justify-center mx-[25px] w-full h-[190px] overflow-hidden  py-5 ">
+                      <div className="max-xs:flex max-xs:justify-center mx-[25px] w-full h-[200px] overflow-hidden py-5">
                         <Link href={`product/${item.product_id}`}>
-                          <Image
-                            width={250}
-                            height={200}
-                            src={
-                              item.image_url && item.image_url.length > 0
-                                ? item.image_url[0]
-                                : defaultImage
-                            }
-                            alt="product_image"
-                          />
+                          <div className="relative w-full h-full">
+                            <Image
+                              layout="fill"
+                              objectFit="contain"
+                              objectPosition="center"
+                              src={
+                                item.image_url && item.image_url.length > 0
+                                  ? item.image_url[0]
+                                  : defaultImage
+                              }
+                              alt="product_image"
+                            />
+                          </div>
                         </Link>
                       </div>
 
@@ -348,9 +350,9 @@ const Index = () => {
                   ))}
                 </div>
               )}
-              <button 
-              className="w-full py-[15px] mt-[50px] px-10 bg-white rounded-[5px] text-[20px] hover:bg-[#FBD029] hover:text-[#1F1D14] transition-all duration-500 ease-linear"
-              onClick={handleClick}
+              <button
+                className="w-full py-[15px] mt-[50px] px-10 bg-white rounded-[5px] text-[20px] hover:bg-[#FBD029] hover:text-[#1F1D14] transition-all duration-500 ease-linear"
+                onClick={handleClick}
               >
                 Показать ещё 3
               </button>

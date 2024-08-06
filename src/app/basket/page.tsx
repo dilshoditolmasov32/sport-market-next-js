@@ -273,11 +273,6 @@ const Index = () => {
       <KartaModal open={open} setOpen={setOpen} />
      
      
-      <br />
-      <br />
-      <SuccessModal />
-      <br />
-      <br />
       <MapModal />
     </>
   );
