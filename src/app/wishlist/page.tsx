@@ -1,8 +1,8 @@
 "use client";
+import { memo, useEffect, useState } from "react";
 import Image from "next/image";
-import { like, savat, shopping_bag } from "@images";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { like, savat, shopping_bag } from "@images";
 import { Product } from "@types";
 import { getLikeProduct } from "@service";
 
@@ -125,4 +125,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default  memo(Index);

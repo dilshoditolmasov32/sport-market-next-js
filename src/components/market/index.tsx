@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -117,4 +118,5 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default memo(Index)
+;

@@ -1,6 +1,7 @@
 "use client";
-import { share, print } from "@images";
+import { memo } from "react";
 import Image from "next/image";
+import { share, print } from "@images";
 import { ActionProduct } from "@/components";
 
 const Index = () => {
@@ -87,4 +88,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default memo(Index);;

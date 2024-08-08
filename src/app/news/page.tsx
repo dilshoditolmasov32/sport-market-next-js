@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Breadcrumb } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
 import Image from "next/image";
@@ -111,4 +112,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default  memo(Index);

@@ -1,5 +1,6 @@
-import { product1, product2, product3, product4, like, savat, action } from "@images";
+import { memo } from "react";
 import Image from "next/image";
+import { product1, product2, product3, product4, like, savat, action } from "@images";
 
 const Index = () => {
   const products = [
@@ -77,4 +78,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default  memo(Index);

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { styled } from "@mui/system";
 import { Modal } from "@mui/material";
@@ -10,11 +10,11 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { toast } from "react-toastify";
 import { signInValidationSchema } from "@/utils/validation";
 import { IAuth } from "@types";
 import { sign_in } from "@service";
 import { saveAccessToken } from "../../../helpers/helpers";
-import { toast } from "react-toastify";
 
 const style = {
   position: "absolute" as "absolute",
@@ -154,4 +154,4 @@ const SignInModal: React.FC<SignInProps> = ({ open, setOpen }) => {
   );
 };
 
-export default SignInModal;
+export default memo(SignInModal);

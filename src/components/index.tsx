@@ -12,6 +12,6 @@ import MapModal from "./modal/map"
 import Skeleton from "./skeleton"
 import MarketAbout from "./market"
 import SingleSwipper from "./single-swiper"
-import Comment from "./comment"
 
-export {Header, Footer, Katalog, Products, BoxCard,Box, ActionProduct, KartaModal,MessageModal, SuccessModal,MapModal, Skeleton, MarketAbout , SingleSwipper, Comment}
+
+export {Header, Footer, Katalog, Products, BoxCard,Box, ActionProduct, KartaModal,MessageModal, SuccessModal,MapModal, Skeleton, MarketAbout , SingleSwipper}

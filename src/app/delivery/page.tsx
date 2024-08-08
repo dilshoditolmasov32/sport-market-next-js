@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { ActionProduct } from "@/components";
 
 const Index = () => {
@@ -92,4 +93,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default  memo(Index);

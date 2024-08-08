@@ -10,11 +10,10 @@ export const getProductsData = async (params: unknown) => {
   }
 };
 
-export const singleProductData = async (id: string  | undefined) => {
+export const singleProductData = async (id: string | string[]) => {
   try {
     const response = await API_URL.get(`/product/${id}`, );
     return response
-    console.log("service", response)
   } catch (error) {
     console.error( error);
     return null;

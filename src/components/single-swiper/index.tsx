@@ -10,9 +10,17 @@ import "./index.css";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Image from "next/image";
 
-export default function Index() {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
+interface SingleSwipperProps {
+  colors?: string[];
+}
+
+
+
+
+const Index: React.FC<SingleSwipperProps> = ({ colors }) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+ 
   const images1 = [
     { url: "https://swiperjs.com/demos/images/nature-1.jpg" },
     { url: "https://swiperjs.com/demos/images/nature-2.jpg" },
@@ -23,10 +31,7 @@ export default function Index() {
   return (
     <>
       <Swiper
-        style={{
-          "--swiper-navigation-color": "#fff",
-          "--swiper-pagination-color": "#fff",
-        }}
+        
         spaceBetween={10}
         navigation={{
           nextEl: ".swiper-button-next",
@@ -58,7 +63,6 @@ export default function Index() {
 
       <div className="small_swipper">
         <Swiper
-          onSwiper={setThumbsSwiper}
           spaceBetween={10}
           slidesPerView={4}
           freeMode={true}
@@ -107,3 +111,4 @@ export default function Index() {
   );
 }
 
+export default Index;

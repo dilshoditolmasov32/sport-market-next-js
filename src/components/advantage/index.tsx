@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { check, check2, aksiya, taksi } from "@images"
 import Image from "next/image"
 
@@ -48,4 +49,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default  memo(Index)

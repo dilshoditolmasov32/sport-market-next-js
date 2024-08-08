@@ -1,21 +1,22 @@
 "use client";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Image from "next/image";
-import { TextField } from "@mui/material";
-import {  delete_icon, click, payme } from "@images";
-import { KartaModal, MapModal, SuccessModal } from "@/components";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { TextField } from "@mui/material";
 import { styled } from "@mui/system";
 import { useMask } from "@react-input/mask";
 import Stack from "@mui/material/Stack";
+import { delete_icon, click, payme } from "@images";
+import { KartaModal } from "@/components";
 import { korzinkaValidationSchema } from "@/utils/validation";
 import { korzinkaPropsType, Product } from "@types";
-import { getBasketProduct } from "../../../service/basket";
+import { getBasketProduct } from "@service";
 
 const Index = () => {
   const [basket, setBasket] = useState<Product[]>([]);
   const [open, setOpen] = useState(false);
   const [counts, setCounts] = useState<{ [key: string]: number }>({});
+  const [totalCost, setTotalCost] = useState(0);
 
   useEffect(() => {
     const fetData = async () => {
@@ -32,6 +33,17 @@ const Index = () => {
 
     fetData();
   }, []);
+
+  useEffect(() => {
+    const calculateTotalCost = () => {
+      const total = basket.reduce((acc, item) => {
+        return acc + item.cost * (counts[item.product_id] || 0);
+      }, 0);
+      setTotalCost(total);
+    };
+
+    calculateTotalCost();
+  }, [counts, basket]);
 
   const CustomTextField = styled(TextField)({
     "& label.Mui-focused": {
@@ -60,7 +72,7 @@ const Index = () => {
   const handleCounter = (product_id: string | number, increment: boolean) => {
     setCounts((prev) => ({
       ...prev,
-      [product_id]: increment ? prev[product_id] + 1 : prev[product_id] - 1,
+      [product_id]: Math.max((prev[product_id] || 1) + (increment ? 1 : -1), 1),
     }));
   };
 
@@ -78,6 +90,7 @@ const Index = () => {
   const handleKartaSubmit = () => {
     setOpen(true);
   };
+
   return (
     <>
       <div>
@@ -170,13 +183,13 @@ const Index = () => {
               <div className="flex justify-between mb-4 ">
                 <div>
                   Кол-во товаров:
-                  <h3 className="text-[#1F1D14] text-[24px] font-bold">4</h3>
+                  <h3 className="text-[#1F1D14] text-[24px] font-bold">{Object.values(counts).reduce((a, b) => a + b, 0)}</h3>
                 </div>
                 <div className="text-end">
                   Сумма:
                   <h3 className="text-[#000] text-[22px] font-semibold">
                     <span className="text-[#1F1D14] text-[24px]">
-                      250 000 uzs
+                      {totalCost} uzs
                     </span>
                   </h3>
                 </div>
@@ -271,11 +284,9 @@ const Index = () => {
       </div>
 
       <KartaModal open={open} setOpen={setOpen} />
-     
-     
-      <MapModal />
+
     </>
   );
 };
 
-export default Index;
+export default memo(Index);

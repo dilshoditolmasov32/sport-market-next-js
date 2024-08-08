@@ -1,3 +1,4 @@
+import { memo } from "react"
 import "./loading.css"
 
 function Skeleton({count}) {
@@ -14,4 +15,4 @@ function Skeleton({count}) {
   )
 }
 
-export default Skeleton
+export default memo(Skeleton)

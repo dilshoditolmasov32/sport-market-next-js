@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { memo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@mui/material";
@@ -44,6 +44,11 @@ const Index = () => {
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const handleCloseMenu = () => {
+    setIsOpen(false);
+  };
+
 
   return (
     <>
@@ -125,6 +130,8 @@ const Index = () => {
                   key={index}
                   href={`${item.url}`}
                   className="font-Fira Sans text-white text-[18px] my-4"
+                  onClick={handleCloseMenu}
+
                 >
                   {item.title}
                 </Link>
@@ -132,12 +139,16 @@ const Index = () => {
               <Link
                 href="tel:+998905711442"
                 className="font-Fira Sans text-white text-[18px] my-4"
+                onClick={handleCloseMenu}
+
               >
                 +998 90 571 14 42
               </Link>
               <Link
                 href="mailto:dilshoditolmasov32@gmail.com"
                 className="font-Fira Sans my-4 text-white text-[18px] pb-4"
+                onClick={handleCloseMenu}
+
               >
                 dilshoditolmasov32@gmail.com
               </Link>
@@ -214,4 +225,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default  memo(Index);

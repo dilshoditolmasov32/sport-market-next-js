@@ -1,4 +1,5 @@
 
+import { memo } from "react"
 import Swipper from "../components/swiper"
 import { Katalog, Products, BoxCard,Box, MarketAbout} from "@/components"
 
@@ -17,4 +18,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default memo(Index)

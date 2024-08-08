@@ -1,8 +1,8 @@
 "use client"
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Button, Modal } from 'antd';
 
-const App: React.FC = () => {
+const Index: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -29,4 +29,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default memo(Index);

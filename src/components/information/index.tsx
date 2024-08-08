@@ -1,3 +1,4 @@
+import { memo } from "react"
 
 const Index = () => {
     const data=[
@@ -54,4 +55,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default memo(Index)

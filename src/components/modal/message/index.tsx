@@ -1,7 +1,7 @@
 "use client";
+import React, { useState, useRef, memo } from "react";
 import { SuccessModal } from "@/components";
 import { Modal } from "@mui/material";
-import React, { useState, useRef } from "react";
 
 interface MessageModalProps {
   visible: boolean;
@@ -81,4 +81,4 @@ const MessageModal: React.FC<MessageModalProps> = ({ visible, onClose }) => {
   );
 };
 
-export default MessageModal;
+export default memo(MessageModal);

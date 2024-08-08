@@ -1,9 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Modal, styled, TextField } from "@mui/material";
 import { MessageModal } from "@/components";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import * as Yup from "yup"; // Add this line to use Yup for validation
 import { kartaPropsType } from "@types";
 
 interface KartaModalProps {
@@ -116,4 +115,4 @@ const Index: React.FC<KartaModalProps> = ({ open, setOpen }) => {
   );
 };
 
-export default Index;
+export default memo(Index);

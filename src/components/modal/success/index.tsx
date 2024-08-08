@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Modal } from "@mui/material";
 import { Progress } from "antd";
 
@@ -29,4 +30,4 @@ const Index:React.FC<KartaModalProps> = ({ open, setOpen }) => {
   );
 };
 
-export default Index;
+export default memo(Index);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Select, Breadcrumb } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
 import { Slider } from "@mui/material";
@@ -19,16 +19,15 @@ const Index = () => {
   const [likedProducts, setLikedProducts] = useState<{
     [key: string]: boolean;
   }>({});
-  // const [params, setParams] = useState({
-  //   page: 1,
-  //   limit: 3,
-  // });
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 3,
+  });
   const defaultImage = "https://unsplash.com/photos/250x190";
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const params = { page, limit: 3 };
       const data = await getProductsData(params);
       if (data) {
         setProducts((prevProducts) => {
@@ -305,7 +304,7 @@ const Index = () => {
                         </button>
                       </div>
                       <div className="max-xs:flex max-xs:justify-center mx-[25px] w-full h-[200px] overflow-hidden py-5">
-                        <Link href={`product/${item.product_id}`}>
+                        <Link href={`product/${item?.product_id}`}>
                           <div className="relative w-full h-full">
                             <Image
                               layout="fill"
@@ -322,7 +321,7 @@ const Index = () => {
                         </Link>
                       </div>
 
-                      <p className="ml-[30px] pr-5 mb-3 mt-5 text-[20px] max-sm:pr-3 font-bold">
+                      <p className="ml-[30px] pr-5 mb-3 mt-5 text-[20px] max-sm:pr-3 font-bold h-[50px]">
                         {item.product_name}
                       </p>
                       <div className="flex justify-between ml-[30px] mr-6 my-3">
@@ -379,4 +378,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default  memo(Index);
